@@ -57,6 +57,8 @@ function promptUsers() {
                 }
                 else {
                     console.log("Insufficient Quantity!");
+                    //end db connection
+                    cleanUp();
                 }
             });
 
@@ -74,6 +76,11 @@ function customerOrder(id, qty, price) {
         if (err) throw (err);
         console.log(orderResult.message);
         console.log("total amount for " + quantityOrdered + " of " + itemOrdered + " is: " + priceOfItem * quantityOrdered);
+        // call to end db connection
+        cleanUp();
     });
-
 };
+
+function cleanUp() {
+    connection.end();
+}
